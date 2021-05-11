@@ -15,7 +15,10 @@ def ranstr(num):
 salt = ranstr(9)
 email_name = 'a' + salt + '@outlook.com'
 email_pass = ranstr(15)
-driver = webdriver.Chrome(r'.\driver.exe')
+options = webdriver.ChromeOptions()
+options.add_argument('-ignore-certificate-errors')
+options.add_argument('-ignore -ssl-errors')
+driver = webdriver.Chrome(r'.\driver.exe',chrome_options = options)
 driver.get("https://outlook.live.com/owa/?nlp=1&signup=1")
 login_form = driver.find_element_by_id('MemberName')
 login_form.send_keys('a' + salt )
@@ -56,9 +59,9 @@ del login_form
 login_form = driver.find_element_by_xpath("/html[@class='m_ul']/body[@class='ltr  Chrome _Win _M90 _D0 Full Win81 RE_WebKit hide-cookie-banner']/div[@id='iPageElt']/div[@id='c_base']/div[@id='c_content']/div[@class='outer']/div[@class='middle ']/div[@id='inner']/div[@class='win-scroll']/div[@id='pageContent']/div[@id='maincontent']/div[@id='pageControlHost']/div[@class='pagination-view has-identity-banner']/div[@id='BirthDateCountryAccrual']/form[@id='BirthDateCountryAccrualForm']/div[@id='BirthDateCountryAccrualInputPane']/div[@class='win-button-pin-bottom']/div[@class='row']/div[@class='button-container no-margin-bottom']/div[@class='inline-block']/input[@id='iSignupAction']").click()
 headers = {'user-agent':'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.114 Safari/537.36'}
 def send_verification_code():
-    htmlcookie = requests.get('https://xxjc.work',headers=headers)
+    htmlcookie = requests.get('https://xxjc.work',headers=headers,verify = False)
     c = {'email':email_name}
-    requests.post('https://xxjc.work/auth/send',data=c,headers=headers,cookies=htmlcookie.cookies)
+    requests.post('https://xxjc.work/auth/send',data=c,headers=headers,cookies=htmlcookie.cookies,verify = False)
 print('OK!')
 keyboard.wait(']')
 send_verification_code()
@@ -74,10 +77,10 @@ if text == '小小机场' :
 '''
 def login():
     d = {'email':email_name,'name':email_name,'passwd':email_name,'repasswd':email_name,'wechat':email_name,'imtype':'1','code':'0','emailcode':z}
-    requests.post('https://xxjc.work/auth/register',headers=headers,data=d)
+    requests.post('https://xxjc.work/auth/register',headers=headers,data=d,verify = False)
     s = {'email':email_name,'passwd':email_name,'code':''}
-    f = requests.post('https://xxjc.work/auth/login',headers=headers,data=s)
-    i = requests.get('https://xxjc.work/user',headers=headers,cookies=f.cookies)
+    f = requests.post('https://xxjc.work/auth/login',headers=headers,data=s,verify = False)
+    i = requests.get('https://xxjc.work/user',headers=headers,cookies=f.cookies,verify = False)
     html = i.text
     url = re.findall('<button class="copy-text btn btn-subscription col-xx-12 col-sm-3 col-lg-2" type="button" data-clipboard-text="(.*?)">',html)
     ssrjson = url[0]
