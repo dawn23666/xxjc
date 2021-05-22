@@ -1,11 +1,8 @@
-import requests,json,re,time,os,random,string,keyboard,pyautogui
+import requests,json,re,time,os,random,string,keyboard,pyautogui,socket
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.support.wait import WebDriverWait
 from time import sleep
-from PIL import Image
-from pytesseract import image_to_string
-from PIL import ImageGrab
 def ranstr(num):
     H = 'abcdefghijklmnopqrstuvwxyz0123456789'
     salt = ''
@@ -58,22 +55,12 @@ del login_form
 login_form = driver.find_element_by_xpath("/html[@class='m_ul']/body[@class='ltr  Chrome _Win _M90 _D0 Full Win81 RE_WebKit hide-cookie-banner']/div[@id='iPageElt']/div[@id='c_base']/div[@id='c_content']/div[@class='outer']/div[@class='middle ']/div[@id='inner']/div[@class='win-scroll']/div[@id='pageContent']/div[@id='maincontent']/div[@id='pageControlHost']/div[@class='pagination-view has-identity-banner']/div[@id='BirthDateCountryAccrual']/form[@id='BirthDateCountryAccrualForm']/div[@id='BirthDateCountryAccrualInputPane']/div[@class='win-button-pin-bottom']/div[@class='row']/div[@class='button-container no-margin-bottom']/div[@class='inline-block']/input[@id='iSignupAction']").click()
 headers = {'user-agent':'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.114 Safari/537.36'}
 def send_verification_code():
-    htmlcookie = requests.get('https://xxjc.vip',headers=headers,verify = False)
     c = {'email':email_name}
-    requests.post('https://xxjc.vip/auth/send',data=c,headers=headers,cookies=htmlcookie.cookies,verify = False)
+    requests.post('https://xxjc.vip/auth/send',data=c,headers=headers,verify = False)
 print('OK!')
 keyboard.wait(']')
 send_verification_code()
-'''
-bbox = (392,491,485,519)
-img = ImageGrab.grab(bbox)
-text = image_to_string(img,lang='chi_sim')
-'''
 z = input('emailcode:')
-'''
-if text == '小小机场' :
-    pyautogui.click(485,519)
-'''
 def login():
     d = {'email':email_name,'name':email_name,'passwd':email_name,'repasswd':email_name,'wechat':email_name,'imtype':'1','code':'0','emailcode':z}
     requests.post('https://xxjc.vip/auth/register',headers=headers,data=d,verify = False)
@@ -86,5 +73,26 @@ def login():
     a = '{\"configs\" : [ 			{ 				\"remarks\" : \"\", 				\"id\" : \"7DD53D24B7DA27E51453A9FD81EEF215\", 				\"server\" : \"server host\", 				\"server_port\" : 8388, 				\"server_udp_port\" : 0, 				\"password\" : \"0\", 				\"method\" : \"aes-256-cfb\", 				\"protocol\" : \"origin\", 				\"protocolparam\" : \"\", 				\"obfs\" : \"plain\", 				\"obfsparam\" : \"\", 				\"remarks_base64\" : \"\", 				\"group\" : \"FreeSSR-public\", 				\"enable\" : true, 				\"udp_over_tcp\" : false 			} 		], 		\"index\" : 0, 		\"random\" : true, 		\"sysProxyMode\" : 3, 		\"shareOverLan\" : true, 		\"localPort\" : 1080, 		\"localAuthPassword\" : \"o3-VjtCQCBLlVletTSc2\", 		\"dnsServer\" : \"\", 		\"reconnectTimes\" : 2, 		\"balanceAlgorithm\" : \"LowException\", 		\"randomInGroup\" : false, 		\"TTL\" : 0, 		\"connectTimeout\" : 5, 		\"proxyRuleMode\" : 2, 		\"proxyEnable\" : false, 		\"pacDirectGoProxy\" : false, 		\"proxyType\" : 0, 		\"proxyHost\" : \"\", 		\"proxyPort\" : 0, 		\"proxyAuthUser\" : \"\", 		\"proxyAuthPass\" : \"\", 		\"proxyUserAgent\" : \"\", 		\"authUser\" : \"\", 		\"authPass\" : \"\", 		\"autoBan\" : false, 		\"sameHostForSameTarget\" : false, 		\"keepVisitTime\" : 180, 		\"isHideTips\" : false, 		\"nodeFeedAutoUpdate\" : true, 		\"serverSubscribes\" : [ 			{ 				\"URL\" : \"'+ssrjson+'\", 				\"Group\" : \"\", 				\"LastUpdateTime\" : 0 			} 		], 		\"token\" : {  		}, 		\"portMap\" : {  		} 	}'
     with open('gui-config.json', 'w') as f:
         f.write(a)
-login()
+def seed():
+    d = {'email':email_name,'name':email_name,'passwd':email_name,'repasswd':email_name,'wechat':email_name,'imtype':'1','code':'0','emailcode':z}
+    requests.post('https://xxjc.vip/auth/register',headers=headers,data=d,verify = False)
+    s = {'email':email_name,'passwd':email_name,'code':''}
+    f = requests.post('https://xxjc.vip/auth/login',headers=headers,data=s,verify = False)
+    i = requests.get('https://xxjc.vip/user',headers=headers,cookies=f.cookies,verify = False)
+    html = i.text
+    url = re.findall('<button class="copy-text btn btn-subscription col-xx-12 col-sm-3 col-lg-2" type="button" data-clipboard-text="(.*?)">',html)
+    ssrjson = url[0]
+    s = socket.socket(socket.AF_INET,socket.SOCK_STREAM)
+    s.connect(('127.0.0.1','18449'))
+    s.sendall(ssrjson)
+    s.close()
+def main():
+    with open('xxjc.conf',"r") as f:
+        str_1 = f.read()
+    str_2 = '1'
+    if(str_1 == str_2):
+        login()
+    else:
+        seed()
+main()
 driver.quit()
