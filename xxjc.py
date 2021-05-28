@@ -1,4 +1,4 @@
-import requests,json,re,time,os,random,string,keyboard,pyautogui,socket
+import requests,re,string,keyboard,socket,random
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.support.wait import WebDriverWait
