@@ -20,39 +20,24 @@ driver = webdriver.Chrome(r'.\driver.exe',chrome_options = options)
 driver.get("https://outlook.live.com/owa/?nlp=1&signup=1")
 login_form = driver.find_element_by_id('MemberName')
 login_form.send_keys('a' + salt )
-login_click = driver.find_element_by_id('iSignupAction').click()
+driver.find_element_by_id('iSignupAction').click()
 driver.implicitly_wait(3.5)
-login_pass = driver.find_element_by_xpath("/html[@class='m_ul']/body[@class='ltr  Chrome _Win _M90 _D0 Full Win81 RE_WebKit hide-cookie-banner']/div[@id='iPageElt']/div[@id='c_base']/div[@id='c_content']/div[@class='outer']/div[@class='middle ']/div[@id='inner']/div[@class='win-scroll']/div[@id='pageContent']/div[@id='maincontent']/div[@id='pageControlHost']/div[@class='pagination-view has-identity-banner']/div[@id='Password']/form[@id='PasswordForm']/div[@class='row form-group']/div[@class='col-md-24']/input[@id='PasswordInput']")
+login_pass = driver.find_element_by_xpath("//*[@id='PasswordInput']")
 login_pass.send_keys(email_pass)
-del login_click
-login_click = driver.find_element_by_xpath("/html[@class='m_ul']/body[@class='ltr  Chrome _Win _M90 _D0 Full Win81 RE_WebKit hide-cookie-banner']/div[@id='iPageElt']/div[@id='c_base']/div[@id='c_content']/div[@class='outer']/div[@class='middle ']/div[@id='inner']/div[@class='win-scroll']/div[@id='pageContent']/div[@id='maincontent']/div[@id='pageControlHost']/div[@class='pagination-view has-identity-banner']/div[@id='Password']/form[@id='PasswordForm']/div[@class='win-button-pin-bottom']/div[@class='row']/div[@class='button-container']/div[@class='inline-block']/input[@id='iSignupAction']").click()
-del login_click,login_form,login_pass
-login_form = driver.find_element_by_xpath("/html[@class='m_ul']/body[@class='ltr  Chrome _Win _M90 _D0 Full Win81 RE_WebKit hide-cookie-banner']/div[@id='iPageElt']/div[@id='c_base']/div[@id='c_content']/div[@class='outer']/div[@class='middle ']/div[@id='inner']/div[@class='win-scroll']/div[@id='pageContent']/div[@id='maincontent']/div[@id='pageControlHost']/div[@class='pagination-view has-identity-banner']/div[@id='ProfileAccrual']/form[@id='ProfileAccrualForm']/div[@id='ProfileAccrualInputPane']/div[@class='row']/div[@class='form-group col-md-24'][1]/input[@id='LastName']")
+driver.find_element_by_xpath("//*[@id='iSignupAction']").click()
+login_form = driver.find_element_by_xpath("//*[@id='LastName']")
 login_form.send_keys('1')
-del login_form
-login_form = driver.find_element_by_xpath("/html[@class='m_ul']/body[@class='ltr  Chrome _Win _M90 _D0 Full Win81 RE_WebKit hide-cookie-banner']/div[@id='iPageElt']/div[@id='c_base']/div[@id='c_content']/div[@class='outer']/div[@class='middle ']/div[@id='inner']/div[@class='win-scroll']/div[@id='pageContent']/div[@id='maincontent']/div[@id='pageControlHost']/div[@class='pagination-view has-identity-banner']/div[@id='ProfileAccrual']/form[@id='ProfileAccrualForm']/div[@id='ProfileAccrualInputPane']/div[@class='row']/div[@class='form-group col-md-24'][2]/input[@id='FirstName']")
+login_form = driver.find_element_by_xpath("//*[@id='FirstName']")
 login_form.send_keys('1')
 login_form.send_keys(Keys.ENTER)
-del login_form
 try:
-    login_form = driver.find_element_by_xpath("/html[@class='m_ul']/body[@class='ltr  Chrome _Win _M90 _D0 Full Win81 RE_WebKit hide-cookie-banner']/div[@id='iPageElt']/div[@id='c_base']/div[@id='c_content']/div[@class='outer']/div[@class='middle ']/div[@id='inner']/div[@class='win-scroll']/div[@id='pageContent']/div[@id='maincontent']/div[@id='pageControlHost']/div[@class='pagination-view has-identity-banner']/div[@id='BirthDateCountryAccrual']/form[@id='BirthDateCountryAccrualForm']/div[@id='BirthDateCountryAccrualInputPane']/div[@class='row'][2]/div[@class='form-group form-control force-padding']/div[@id='BirthYearContainer']/input[@id='BirthYear']")
+    login_form = driver.find_element_by_xpath("//*[@id='BirthYear']")
     login_form.send_keys('1980')
 except:
-    login_form_0 = driver.find_element_by_xpath("/html[@class='m_ul']/body[@class='ltr  Chrome _Win _M90 _D0 Full Win81 RE_WebKit hide-cookie-banner']/div[@id='iPageElt']/div[@id='c_base']/div[@id='c_content']/div[@class='outer']/div[@class='middle ']/div[@id='inner']/div[@class='win-scroll']/div[@id='pageContent']/div[@id='maincontent']/div[@id='pageControlHost']/div[@class='pagination-view has-identity-banner']/div[@id='BirthDateCountryAccrual']/form[@id='BirthDateCountryAccrualForm']/div[@id='BirthDateCountryAccrualInputPane']/div[@class='row'][2]/div[@class='form-group form-control force-padding']/div[@id='BirthYearContainer']/select[@id='BirthYear']/option[20]").click()
-    del login_form_0
-del login_form
-try:
-    login_form = driver.find_element_by_xpath("/html[@class='m_ul']/body[@class='ltr  Chrome _Win _M90 _D0 Full Win81 RE_WebKit hide-cookie-banner']/div[@id='iPageElt']/div[@id='c_base']/div[@id='c_content']/div[@class='outer']/div[@class='middle ']/div[@id='inner']/div[@class='win-scroll']/div[@id='pageContent']/div[@id='maincontent']/div[@id='pageControlHost']/div[@class='pagination-view has-identity-banner']/div[@id='BirthDateCountryAccrual']/form[@id='BirthDateCountryAccrualForm']/div[@id='BirthDateCountryAccrualInputPane']/div[@class='row'][2]/div[@class='form-group form-control force-padding']/div[@id='BirthMonthContainer']/select[@id='BirthMonth']/option[2]").click()
-    
-except:
-    login_form = driver.find_element_by_xpath("/html[@class='m_ul']/body[@class='ltr  Chrome _Win _M90 _D0 Full Win81 RE_WebKit hide-cookie-banner']/div[@id='iPageElt']/div[@id='c_base']/div[@id='c_content']/div[@class='outer']/div[@class='middle ']/div[@id='inner']/div[@class='win-scroll']/div[@id='pageContent']/div[@id='maincontent']/div[@id='pageControlHost']/div[@class='pagination-view has-identity-banner']/div[@id='BirthDateCountryAccrual']/form[@id='BirthDateCountryAccrualForm']/div[@id='BirthDateCountryAccrualInputPane']/div[@class='row'][2]/div[@class='form-group form-control force-padding']/div[@id='BirthMonthContainer']/select[@id='BirthMonth']/option[2]").click()
-del login_form
-try:
-    login_form = driver.find_element_by_xpath("/html[@class='m_ul']/body[@class='ltr  Chrome _Win _M90 _D0 Full Win81 RE_WebKit hide-cookie-banner']/div[@id='iPageElt']/div[@id='c_base']/div[@id='c_content']/div[@class='outer']/div[@class='middle ']/div[@id='inner']/div[@class='win-scroll']/div[@id='pageContent']/div[@id='maincontent']/div[@id='pageControlHost']/div[@class='pagination-view has-identity-banner']/div[@id='BirthDateCountryAccrual']/form[@id='BirthDateCountryAccrualForm']/div[@id='BirthDateCountryAccrualInputPane']/div[@class='row'][2]/div[@class='form-group form-control force-padding']/div[@id='BirthDayContainer']/select[@id='BirthDay']/option[20]").click()
-except:
-    login_form = driver.find_element_by_xpath("/html[@class='m_ul']/body[@class='ltr  Chrome _Win _M90 _D0 Full Win81 RE_WebKit hide-cookie-banner']/div[@id='iPageElt']/div[@id='c_base']/div[@id='c_content']/div[@class='outer']/div[@class='middle ']/div[@id='inner']/div[@class='win-scroll']/div[@id='pageContent']/div[@id='maincontent']/div[@id='pageControlHost']/div[@class='pagination-view has-identity-banner']/div[@id='BirthDateCountryAccrual']/form[@id='BirthDateCountryAccrualForm']/div[@id='BirthDateCountryAccrualInputPane']/div[@class='row'][2]/div[@class='form-group form-control force-padding']/div[@id='BirthDayContainer']/select[@id='BirthDay']/option[20]").click()
-del login_form
-login_form = driver.find_element_by_xpath("/html[@class='m_ul']/body[@class='ltr  Chrome _Win _M90 _D0 Full Win81 RE_WebKit hide-cookie-banner']/div[@id='iPageElt']/div[@id='c_base']/div[@id='c_content']/div[@class='outer']/div[@class='middle ']/div[@id='inner']/div[@class='win-scroll']/div[@id='pageContent']/div[@id='maincontent']/div[@id='pageControlHost']/div[@class='pagination-view has-identity-banner']/div[@id='BirthDateCountryAccrual']/form[@id='BirthDateCountryAccrualForm']/div[@id='BirthDateCountryAccrualInputPane']/div[@class='win-button-pin-bottom']/div[@class='row']/div[@class='button-container no-margin-bottom']/div[@class='inline-block']/input[@id='iSignupAction']").click()
+    driver.find_element_by_xpath("/html[@class='m_ul']/body[@class='ltr  Chrome _Win _M90 _D0 Full Win81 RE_WebKit hide-cookie-banner']/div[@id='iPageElt']/div[@id='c_base']/div[@id='c_content']/div[@class='outer']/div[@class='middle ']/div[@id='inner']/div[@class='win-scroll']/div[@id='pageContent']/div[@id='maincontent']/div[@id='pageControlHost']/div[@class='pagination-view has-identity-banner']/div[@id='BirthDateCountryAccrual']/form[@id='BirthDateCountryAccrualForm']/div[@id='BirthDateCountryAccrualInputPane']/div[@class='row'][2]/div[@class='form-group form-control force-padding']/div[@id='BirthYearContainer']/select[@id='BirthYear']/option[20]").click()
+driver.find_element_by_xpath("//*[@id='BirthMonth']/option[2]").click()
+driver.find_element_by_xpath("//*[@id='BirthDay']/option[20]").click()
+driver.find_element_by_xpath("//*[@id='iSignupAction']").click()
 headers = {'user-agent':'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.114 Safari/537.36'}
 def send_verification_code():
     c = {'email':email_name}
