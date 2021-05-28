@@ -34,7 +34,7 @@ try:
     login_form = driver.find_element_by_xpath("//*[@id='BirthYear']")
     login_form.send_keys('1980')
 except:
-    driver.find_element_by_xpath("/html[@class='m_ul']/body[@class='ltr  Chrome _Win _M90 _D0 Full Win81 RE_WebKit hide-cookie-banner']/div[@id='iPageElt']/div[@id='c_base']/div[@id='c_content']/div[@class='outer']/div[@class='middle ']/div[@id='inner']/div[@class='win-scroll']/div[@id='pageContent']/div[@id='maincontent']/div[@id='pageControlHost']/div[@class='pagination-view has-identity-banner']/div[@id='BirthDateCountryAccrual']/form[@id='BirthDateCountryAccrualForm']/div[@id='BirthDateCountryAccrualInputPane']/div[@class='row'][2]/div[@class='form-group form-control force-padding']/div[@id='BirthYearContainer']/select[@id='BirthYear']/option[20]").click()
+    driver.find_element_by_xpath("//*[@id='BirthYear']/option[20]").click()
 driver.find_element_by_xpath("//*[@id='BirthMonth']/option[2]").click()
 driver.find_element_by_xpath("//*[@id='BirthDay']/option[20]").click()
 driver.find_element_by_xpath("//*[@id='iSignupAction']").click()
