@@ -19,6 +19,7 @@ driver = webdriver.Chrome(r'.\driver.exe',chrome_options = options)
 driver.get("https://outlook.live.com/owa/?nlp=1&signup=1")
 login_form = driver.find_element_by_id('MemberName')
 login_form.send_keys('a' + salt )
+driver.implicitly_wait(500)
 driver.find_element_by_id('iSignupAction').click()
 driver.implicitly_wait(3.5)
 login_pass = driver.find_element_by_xpath("//*[@id='PasswordInput']")
@@ -35,6 +36,7 @@ try:
 except:
     driver.find_element_by_xpath("//*[@id='BirthYear']/option[20]").click()
 driver.find_element_by_xpath("//*[@id='BirthMonth']/option[2]").click()
+driver.implicitly_wait(500)
 driver.find_element_by_xpath("//*[@id='BirthDay']/option[20]").click()
 driver.find_element_by_xpath("//*[@id='iSignupAction']").click()
 headers = {'user-agent':'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.114 Safari/537.36'}
