@@ -41,17 +41,17 @@ driver.find_element_by_xpath("//*[@id='iSignupAction']").click()
 headers = {'user-agent':'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.114 Safari/537.36'}
 def send_verification_code():
     c = {'email':email_name}
-    requests.post('https://xxjc.vip/auth/send',data=c,headers=headers,verify = False)
+    requests.post('https://xxjc.vip/auth/send',data=c,headers=headers)
 print('OK!')
 keyboard.wait(']')
 send_verification_code()
 z = input('emailcode:')
 def login():
     d = {'email':email_name,'name':email_name,'passwd':email_name,'repasswd':email_name,'wechat':email_name,'imtype':'1','code':'0','emailcode':z}
-    requests.post('https://xxjc.vip/auth/register',headers=headers,data=d,verify = False)
+    requests.post('https://xxjc.vip/auth/register',headers=headers,data=d)
     s = {'email':email_name,'passwd':email_name,'code':''}
-    f = requests.post('https://xxjc.vip/auth/login',headers=headers,data=s,verify = False)
-    i = requests.get('https://xxjc.vip/user',headers=headers,cookies=f.cookies,verify = False)
+    f = requests.post('https://xxjc.vip/auth/login',headers=headers,data=s)
+    i = requests.get('https://xxjc.vip/user',headers=headers,cookies=f.cookies)
     html = i.text
     url = re.findall('<input type="text" class="input form-control form-control-monospace cust-link col-xx-12 col-sm-8 col-lg-7" name="input1" readonly value="(.*?)" readonly="true">',html)
     ssrjson = url[0]
@@ -60,10 +60,10 @@ def login():
         f.write(a)
 def seed():
     d = {'email':email_name,'name':email_name,'passwd':email_name,'repasswd':email_name,'wechat':email_name,'imtype':'1','code':'0','emailcode':z}
-    requests.post('https://xxjc.vip/auth/register',headers=headers,data=d,verify = False)
+    requests.post('https://xxjc.vip/auth/register',headers=headers,data=d)
     s = {'email':email_name,'passwd':email_name,'code':''}
-    f = requests.post('https://xxjc.vip/auth/login',headers=headers,data=s,verify = False)
-    i = requests.get('https://xxjc.vip/user',headers=headers,cookies=f.cookies,verify = False)
+    f = requests.post('https://xxjc.vip/auth/login',headers=headers,data=s)
+    i = requests.get('https://xxjc.vip/user',headers=headers,cookies=f.cookies)
     html = i.text
     url = re.findall('<input type="text" class="input form-control form-control-monospace cust-link col-xx-12 col-sm-8 col-lg-7" name="input1" readonly value="(.*?)" readonly="true">',html)
     ssrjson = url[0]
