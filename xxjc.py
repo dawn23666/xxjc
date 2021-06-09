@@ -1,8 +1,7 @@
-import requests,re,string,keyboard,socket,random
+import requests,re,string,keyboard,random
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.support.wait import WebDriverWait
-from time import sleep
 def ranstr(num):
     H = 'abcdefghijklmnopqrstuvwxyz0123456789'
     salt = ''
@@ -58,26 +57,5 @@ def login():
     a = '{\"configs\" : [ 			{ 				\"remarks\" : \"\", 				\"id\" : \"7DD53D24B7DA27E51453A9FD81EEF215\", 				\"server\" : \"server host\", 				\"server_port\" : 8388, 				\"server_udp_port\" : 0, 				\"password\" : \"0\", 				\"method\" : \"aes-256-cfb\", 				\"protocol\" : \"origin\", 				\"protocolparam\" : \"\", 				\"obfs\" : \"plain\", 				\"obfsparam\" : \"\", 				\"remarks_base64\" : \"\", 				\"group\" : \"FreeSSR-public\", 				\"enable\" : true, 				\"udp_over_tcp\" : false 			} 		], 		\"index\" : 0, 		\"random\" : true, 		\"sysProxyMode\" : 3, 		\"shareOverLan\" : true, 		\"localPort\" : 1080, 		\"localAuthPassword\" : \"o3-VjtCQCBLlVletTSc2\", 		\"dnsServer\" : \"\", 		\"reconnectTimes\" : 2, 		\"balanceAlgorithm\" : \"LowException\", 		\"randomInGroup\" : false, 		\"TTL\" : 0, 		\"connectTimeout\" : 5, 		\"proxyRuleMode\" : 2, 		\"proxyEnable\" : false, 		\"pacDirectGoProxy\" : false, 		\"proxyType\" : 0, 		\"proxyHost\" : \"\", 		\"proxyPort\" : 0, 		\"proxyAuthUser\" : \"\", 		\"proxyAuthPass\" : \"\", 		\"proxyUserAgent\" : \"\", 		\"authUser\" : \"\", 		\"authPass\" : \"\", 		\"autoBan\" : false, 		\"sameHostForSameTarget\" : false, 		\"keepVisitTime\" : 180, 		\"isHideTips\" : false, 		\"nodeFeedAutoUpdate\" : true, 		\"serverSubscribes\" : [ 			{ 				\"URL\" : \"'+ssrjson+'\", 				\"Group\" : \"\", 				\"LastUpdateTime\" : 0 			} 		], 		\"token\" : {  		}, 		\"portMap\" : {  		} 	}'
     with open('gui-config.json', 'w') as f:
         f.write(a)
-def seed():
-    d = {'email':email_name,'name':email_name,'passwd':email_name,'repasswd':email_name,'wechat':email_name,'imtype':'1','code':'0','emailcode':z}
-    requests.post('https://xxjc.vip/auth/register',headers=headers,data=d)
-    s = {'email':email_name,'passwd':email_name,'code':''}
-    f = requests.post('https://xxjc.vip/auth/login',headers=headers,data=s)
-    i = requests.get('https://xxjc.vip/user',headers=headers,cookies=f.cookies)
-    html = i.text
-    url = re.findall('<input type="text" class="input form-control form-control-monospace cust-link col-xx-12 col-sm-8 col-lg-7" name="input1" readonly value="(.*?)" readonly="true">',html)
-    ssrjson = url[0]
-    s = socket.socket(socket.AF_INET,socket.SOCK_STREAM)
-    s.connect(('127.0.0.1','18449'))
-    s.sendall(ssrjson)
-    s.close()
-def main():
-    with open('xxjc.conf',"r") as f:
-        str_1 = f.read()
-    str_2 = '1'
-    if(str_1 == str_2):
-        login()
-    else:
-        seed()
-main()
+login()
 driver.quit()
