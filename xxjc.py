@@ -2,6 +2,7 @@ import requests,re,string,keyboard,random
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.support.wait import WebDriverWait
+headers = {'user-agent':'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.114 Safari/537.36'}
 def ranstr(num):
     H = 'abcdefghijklmnopqrstuvwxyz0123456789'
     salt = ''
@@ -13,6 +14,7 @@ def send_verification_code():
     c = {'email':email_name}
     requests.post('https://xxjc.vip/auth/send',data=c,headers=headers)
 def login():
+    z = input('emailcode:')
     d = {'email':email_name,'name':email_name,'passwd':email_name,'repasswd':email_name,'wechat':email_name,'imtype':'1','code':'0','emailcode':z}
     requests.post('https://xxjc.vip/auth/register',headers=headers,data=d)
     s = {'email':email_name,'passwd':email_name,'code':''}
@@ -54,10 +56,8 @@ driver.find_element_by_xpath("//*[@id='BirthMonth']/option[2]").click()
 driver.implicitly_wait(500)
 driver.find_element_by_xpath("//*[@id='BirthDay']/option[20]").click()
 driver.find_element_by_xpath("//*[@id='iSignupAction']").click()
-headers = {'user-agent':'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.114 Safari/537.36'}
 print('OK!')
 keyboard.wait(']')
 send_verification_code()
-z = input('emailcode:')
 login()
 driver.quit()
