@@ -2,6 +2,7 @@ import requests,re,string,keyboard,random
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.support.wait import WebDriverWait
+from time import sleep
 headers = {'user-agent':'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.114 Safari/537.36'}
 def ranstr(num):
     H = 'abcdefghijklmnopqrstuvwxyz0123456789'
@@ -54,6 +55,7 @@ except:
     driver.find_element_by_xpath("//*[@id='BirthYear']/option[20]").click()
 driver.find_element_by_xpath("//*[@id='BirthMonth']/option[2]").click()
 driver.implicitly_wait(500)
+sleep(0.5)
 driver.find_element_by_xpath("//*[@id='BirthDay']/option[20]").click()
 driver.find_element_by_xpath("//*[@id='iSignupAction']").click()
 print('OK!')
