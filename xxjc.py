@@ -1,67 +1,48 @@
-import requests,re,string,keyboard,random
-from selenium import webdriver
-from selenium.webdriver.common.keys import Keys
-from selenium.webdriver.support.wait import WebDriverWait
-from time import sleep
-headers = {'user-agent':'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.114 Safari/537.36'}
-def ranstr(num):
-    H = 'abcdefghijklmnopqrstuvwxyz0123456789'
-    salt = ''
-    for i in range(num):
-        salt += random.choice(H)
-        del i
-    return salt
-def send_verification_code():
-    c = {'email':email_name}
-    requests.post('https://xxjc.vip/auth/send',data=c,headers=headers)
-def login():
-    z = input('emailcode:')
-    d = {'email':email_name,'name':email_name,'passwd':email_name,'repasswd':email_name,'wechat':email_name,'imtype':'1','code':'0','emailcode':z}
-    requests.post('https://xxjc.vip/auth/register',headers=headers,data=d)
-    s = {'email':email_name,'passwd':email_name,'code':''}
-    f = requests.post('https://xxjc.vip/auth/login',headers=headers,data=s)
-    i = requests.get('https://xxjc.vip/user',headers=headers,cookies=f.cookies)
-    html = i.text
-    url = re.findall('<input type="text" class="input form-control form-control-monospace cust-link col-xx-12 col-sm-8 col-lg-7" name="input1" readonly value="(.*?)" readonly="true">',html)
-    ssrjson = url[0]
-    a = '{\"configs\" : [ 			{ 				\"remarks\" : \"\", 				\"id\" : \"7DD53D24B7DA27E51453A9FD81EEF215\", 				\"server\" : \"server host\", 				\"server_port\" : 8388, 				\"server_udp_port\" : 0, 				\"password\" : \"0\", 				\"method\" : \"aes-256-cfb\", 				\"protocol\" : \"origin\", 				\"protocolparam\" : \"\", 				\"obfs\" : \"plain\", 				\"obfsparam\" : \"\", 				\"remarks_base64\" : \"\", 				\"group\" : \"FreeSSR-public\", 				\"enable\" : true, 				\"udp_over_tcp\" : false 			} 		], 		\"index\" : 0, 		\"random\" : true, 		\"sysProxyMode\" : 3, 		\"shareOverLan\" : true, 		\"localPort\" : 1080, 		\"localAuthPassword\" : \"o3-VjtCQCBLlVletTSc2\", 		\"dnsServer\" : \"\", 		\"reconnectTimes\" : 2, 		\"balanceAlgorithm\" : \"LowException\", 		\"randomInGroup\" : false, 		\"TTL\" : 0, 		\"connectTimeout\" : 5, 		\"proxyRuleMode\" : 2, 		\"proxyEnable\" : false, 		\"pacDirectGoProxy\" : false, 		\"proxyType\" : 0, 		\"proxyHost\" : \"\", 		\"proxyPort\" : 0, 		\"proxyAuthUser\" : \"\", 		\"proxyAuthPass\" : \"\", 		\"proxyUserAgent\" : \"\", 		\"authUser\" : \"\", 		\"authPass\" : \"\", 		\"autoBan\" : false, 		\"sameHostForSameTarget\" : false, 		\"keepVisitTime\" : 180, 		\"isHideTips\" : false, 		\"nodeFeedAutoUpdate\" : true, 		\"serverSubscribes\" : [ 			{ 				\"URL\" : \"'+ssrjson+'\", 				\"Group\" : \"\", 				\"LastUpdateTime\" : 0 			} 		], 		\"token\" : {  		}, 		\"portMap\" : {  		} 	}'
-    with open('gui-config.json', 'w') as f:
-        f.write(a)
-salt = ranstr(9)
-email_name = 'a' + salt + '@outlook.com'
-email_pass = ranstr(15)
-options = webdriver.ChromeOptions()
-options.add_argument('-ignore-certificate-errors')
-options.add_argument('-ignore -ssl-errors')
-driver = webdriver.Chrome(r'.\driver.exe',chrome_options = options)
-driver.get("https://outlook.live.com/owa/?nlp=1&signup=1")
-login_form = driver.find_element_by_id('MemberName')
-login_form.send_keys('a' + salt )
-driver.implicitly_wait(500)
-driver.find_element_by_id('iSignupAction').click()
-driver.implicitly_wait(3.5)
-login_pass = driver.find_element_by_xpath("//*[@id='PasswordInput']")
-login_pass.send_keys(email_pass)
-driver.find_element_by_xpath("//*[@id='iSignupAction']").click()
-login_form = driver.find_element_by_xpath("//*[@id='LastName']")
-login_form.send_keys('1')
-login_form = driver.find_element_by_xpath("//*[@id='FirstName']")
-login_form.send_keys('1')
-login_form.send_keys(Keys.ENTER)
-try:
-    login_form = driver.find_element_by_xpath("//*[@id='BirthYear']")
-    login_form.send_keys('1980')
-except:
-    driver.find_element_by_xpath("//*[@id='BirthYear']/option[20]").click()
-driver.find_element_by_xpath("//*[@id='BirthMonth']/option[2]").click()
-driver.implicitly_wait(500)
-sleep(0.5)
-driver.find_element_by_xpath("//*[@id='BirthDay']/option[20]").click()
-driver.find_element_by_xpath("//*[@id='iSignupAction']").click()
-print('OK!')
-keyboard.wait(']')
-send_verification_code()
-send_verification_code()
-send_verification_code()
-login()
-driver.quit()
+import pyperclip
+import re
+import requests
+
+headers = {
+    'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/108.0.0.0 '
+                  'Safari/537.36'}
+email = input('email:')
+verification_code = {'email': email}
+url = 'https://xxjc.in/'
+requests.post(url + 'auth/send', data=verification_code, headers=headers)
+emailcode = input('emailcode:')
+d = {'email': email, 'name': email, 'passwd': email, 'repasswd': email, 'wechat': email, 'imtype': '1', 'code': '0',
+     'emailcode': emailcode}
+requests.post(url + 'auth/register', headers=headers, data=d)
+s = {'email': email, 'passwd': email, 'code': ''}
+login = requests.post(url + 'auth/login', headers=headers, data=s)
+i = requests.get(url + 'user', headers=headers, cookies=login.cookies)
+html = i.text
+web_data = re.findall(
+    '<button class="copy-text btn btn-subscription col-xx-12 col-sm-3 col-lg-2" type="button" data-clipboard-text="('
+    '.*?)">',
+    html)
+ssrjson = web_data[0]
+pyperclip.copy(ssrjson)
+a = '{"Configs":[{"Id":"3b0a24e3f82e41e282f43a6b33aac8c1","server":"server host","Server_Port":8388,' \
+    '"Server_Udp_Port":0,"Password":"0","Method":"aes-256-cfb","Protocol":"origin","ProtocolParam":"","obfs":"plain",' \
+    '"ObfsParam":"","Remarks_Base64":"","Group":"Default Group","SubTag":"","Enable":true,"UdpOverTcp":false}],' \
+    '"Index":0,"Random":false,"SysProxyMode":2,"ShareOverLan":true,"LocalPort":10800,"ReconnectTimes":2,' \
+    '"BalanceType":4,"RandomInGroup":true,"Ttl":60,"ConnectTimeout":5,"ProxyRuleMode":2,"ProxyEnable":false,' \
+    '"PacDirectGoProxy":false,"ProxyType":0,"ProxyHost":"","ProxyPort":1,"ProxyAuthUser":"","ProxyAuthPass":"",' \
+    '"ProxyUserAgent":"","AuthUser":"","AuthPass":"","AutoBan":false,"CheckSwitchAutoCloseAll":true,"LogEnable":true,' \
+    '"SameHostForSameTarget":false,"IsPreRelease":false,"AutoCheckUpdate":true,"LangName":"","DnsClients":[{' \
+    '"Enable":true,"DnsType":1,"Ipv6First":false,"DnsServer":"208.67.222.222","Port":853,"Timeout":10000,' \
+    '"IsEDnsEnabled":false,"EcsIp":"208.67.222.222","EcsSourceNetmask":32,"EcsScopeNetmask":0,"IsTcpEnabled":true,' \
+    '"IsUdpEnabled":true},{"Enable":true,"DnsType":1,"Ipv6First":false,"DnsServer":"208.67.220.220","Port":853,' \
+    '"Timeout":10000,"IsEDnsEnabled":false,"EcsIp":"208.67.222.222","EcsSourceNetmask":32,"EcsScopeNetmask":0,' \
+    '"IsTcpEnabled":true,"IsUdpEnabled":true},{"Enable":true,"DnsType":1,"Ipv6First":false,"DnsServer":"1.1.1.1",' \
+    '"Port":853,"Timeout":10000,"IsEDnsEnabled":false,"EcsIp":"208.67.222.222","EcsSourceNetmask":32,' \
+    '"EcsScopeNetmask":0,"IsTcpEnabled":true,"IsUdpEnabled":true},{"Enable":true,"DnsType":1,"Ipv6First":false,' \
+    '"DnsServer":"1.0.0.1","Port":853,"Timeout":10000,"IsEDnsEnabled":false,"EcsIp":"208.67.222.222",' \
+    '"EcsSourceNetmask":32,"EcsScopeNetmask":0,"IsTcpEnabled":true,"IsUdpEnabled":true},{"Enable":true,"DnsType":1,' \
+    '"Ipv6First":false,"DnsServer":"1.12.12.12","Port":853,"Timeout":10000,"IsEDnsEnabled":false,' \
+    '"EcsIp":"208.67.222.222","EcsSourceNetmask":32,"EcsScopeNetmask":0,"IsTcpEnabled":true,"IsUdpEnabled":true}],' \
+    '"ServerSubscribes":[{"Url":"' + ssrjson + '","Tag":"6F239D5508B9326E482DB5022257098E","LastUpdateTime":0,' \
+                                               '"AutoCheckUpdate":true,"ProxyType":0}],"PortMap":{}}'
+with open('gui-config.json', 'w') as f:
+    f.write(a)
