@@ -24,7 +24,7 @@ pyperclip.copy(ssrjson)
 a = '{"Configs":[{"Id":"3b0a24e3f82e41e282f43a6b33aac8c1","server":"server host","Server_Port":8388,' \
     '"Server_Udp_Port":0,"Password":"0","Method":"aes-256-cfb","Protocol":"origin","ProtocolParam":"","obfs":"plain",' \
     '"ObfsParam":"","Remarks_Base64":"","Group":"Default Group","SubTag":"","Enable":true,"UdpOverTcp":false}],' \
-    '"Index":0,"Random":false,"SysProxyMode":2,"ShareOverLan":true,"LocalPort":10800,"ReconnectTimes":2,' \
+    '"Index":0,"Random":false,"SysProxyMode":2,"ShareOverLan":true,"LocalPort":33333,"ReconnectTimes":2,' \
     '"BalanceType":4,"RandomInGroup":true,"Ttl":60,"ConnectTimeout":5,"ProxyRuleMode":2,"ProxyEnable":false,' \
     '"PacDirectGoProxy":false,"ProxyType":0,"ProxyHost":"","ProxyPort":1,"ProxyAuthUser":"","ProxyAuthPass":"",' \
     '"ProxyUserAgent":"","AuthUser":"","AuthPass":"","AutoBan":false,"CheckSwitchAutoCloseAll":true,"LogEnable":true,' \
